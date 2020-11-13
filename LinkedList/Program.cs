@@ -31,7 +31,30 @@ public class MyLinkedList<T>
 
         return false;
     }
+    AddLast(T)
+    {
 
+    }
+    Clear()
+    {
+
+    }
+    Find(T)
+    {
+
+    }
+    Remove(Node T)
+    {
+
+    }
+    Remove(T)
+    {
+
+    }
+    GetEnumerator()
+    {
+
+    }
 }
 
 public class Node<T>
