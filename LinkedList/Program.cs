@@ -1,75 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-public class MyLinkedList<T>
+namespace LinkedList
 {
-    private Node<T> first = null;
-    public int Count
+    public class Program
     {
-        get;
-        private set;
-    } = 0;
-
-    public Node<T> AddFirst(T data)
-    {
-        var node = new Node<T>(data);
-        node.Next = first;
-        first = node;
-        Count++;
-        return node;
-    }
-
-    public bool Contains(T data)
-    {
-        var current = first;
-        while (current.Next != null)
+        static void Main()
         {
-            if (current.Data.Equals(data))
-                return true;
-
-            current = current.Next;
         }
-
-        return false;
-    }
-    AddLast(T)
-    {
-
-    }
-    Clear()
-    {
-
-    }
-    Find(T)
-    {
-
-    }
-    Remove(Node T)
-    {
-
-    }
-    Remove(T)
-    {
-
-    }
-    GetEnumerator()
-    {
-
-    }
-}
-
-public class Node<T>
-{
-    public T Data { get; set; }
-    public Node<T> Next { get; set; }
-    public Node(T data)
-    {
-        Data = data;
-    }
-}
-
-public class Program
-{
-    static void Main()
-    {
     }
 }

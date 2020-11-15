@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using LinkedList;
 
 namespace Testing
 {
@@ -23,6 +24,36 @@ namespace Testing
             Assert.AreEqual(value, node.Data);
             Assert.AreEqual(4, list.Count);
             Assert.AreEqual(true, list.Contains(3));
+        }
+        [TestMethod]
+        public void TestRemoval()
+        {
+            //Assign
+
+            //Act
+
+            //Assert
+
+        }
+        [TestMethod]
+        public void TestFind()
+        {
+            //Assign
+
+            //Act
+
+            //Assert
+
+        }
+        [TestMethod]
+        public void TestClear()
+        {
+            //Assign
+
+            //Act
+
+            //Assert
+
         }
     }
 }
