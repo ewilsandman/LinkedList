@@ -1,73 +1,133 @@
 ﻿using System;
-
+using System.Collections;
+using System.Collections.Generic;
 namespace MyLinkedList
 {
     public class MyLinkedList<T>
     {
-        private Node<T> first = null;
-        public int Count
-        {
-            get;
-            private set;
-        } = 0;
+        public Node<T> head = null;
 
-        public Node<T> AddFirst(T data)
+        public int Count()
         {
-            var node = new Node<T>(data);
-            node.Next = first;
-            first = node;
-            Count++;
-            return node;
+            int count = 0;
+            if (head == null)
+            {
+                return count;
+            }
+            else
+            {
+                count++;
+                return head.Count(count);
+            }
         }
-
+        public void AddFirst(T data)
+        {
+            if(head == null)
+            {
+                head = new Node<T>(data);
+            }
+            else
+            {
+                var newNode = new Node<T>(data);
+                newNode.Next = head.Next;
+                head.Next = newNode;
+            }
+        }
+        public void AddLast(T data)
+        {
+            if(head == null)
+            {
+                head = new Node<T>(data);
+            }
+            else
+            {
+                head.AddLast(data);
+            }
+        }
+        public void Clear()
+        {
+            if (head != null)
+            {
+                head = null;
+            }
+        }
         public bool Contains(T data)
         {
-            var current = first;
-            while (current.Next != null)
+            if (head.Data.Equals(null))
             {
-                if (current.Data.Equals(data))
-                    return true;
-
-                current = current.Next;
+                return false;
             }
-
-            return false;
+            if (head.Data.Equals(data))
+            {
+                return true;
+            }
+            if (head.Next != null)
+            {
+                return head.Next.Contains(data);
+            }
+            else
+            {
+                return false;
+            }
         }
-        public Node<T> AddLast(T data)
-        {
-            var node = new Node<T>(data);
-            return node;
-        }
-        public void Clear(T data)
-        {
-            var node = new Node<T>(data);
-            node.Next = null;
-        }
-        public Node<T> Find(T data)
-        {
-            var node = new Node<T>(data);
-            return node;
-        }
-        /*public Node<T> RemoveNode(Node n)
-        {
-            var node = new Node<T>(data);
-            return node;
-        }*/
-        public Node<T> Remove(T data)
-        {
-            var node = new Node<T>(data);
-            return node;
-        }
-        /*GetEnumerator()
-        {
-
-        }*/
     }
-
     public class Node<T>
     {
+        public int Count(int count)
+        {
+            if (Next == null)
+            {
+                return count;
+            }
+            else
+            {
+                count++;
+                return Next.Count(count);
+            }
+        }
+        public void AddLast(T data)
+        {
+            if (Next == null)
+            {
+                Next = new Node<T>(data);
+            }
+            else
+            {
+                Next.AddLast(data);
+            }
+        }
+        public bool Contains(T data)
+        {
+            if (Data.Equals(data))
+                return true;
+
+            if (Next != null)
+            {
+                return Next.Contains(data);
+            }
+            else
+            {
+                return false;
+            }
+        }
+       /* public int Find(T data)
+        {
+            
+        }
+        public void Remove(Node T)
+        {
+
+        }
+        public void Remove(T data)
+        {
+
+        }*/
+        public void GetEnumerator()
+        {
+
+        }
         public T Data { get; set; }
-        public Node<T> Next { get; set; }
+        public Node<T> Next { get; set; } = null;
         public Node(T data)
         {
             Data = data;

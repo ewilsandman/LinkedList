@@ -9,35 +9,31 @@ namespace MyLinkedListTests
     public class TestMethod
     {
         [TestMethod]
-        public void TestAddition()
+        public void TestAddContains()
         {
             //Assign
             MyLinkedList<int> list = new MyLinkedList<int>();
-            int value = 5;
 
             //Act
-            var node = list.AddFirst(value);
-            list.AddFirst(2);
-            list.AddFirst(3);
-            list.AddFirst(4);
+            list.AddLast(2);
+            list.AddLast(3);
+            list.AddLast(4);
+            list.AddFirst(8);
 
             //Assert
-            Assert.AreEqual(value, node.Data);
-            Assert.AreEqual(4, list.Count);
             Assert.AreEqual(true, list.Contains(3));
+            Assert.AreEqual(list.Count(), 4);
+           Assert.AreEqual(true, list.Contains(8));
         }
         [TestMethod]
         public void TestRemoval()
         {
             //Assign
             MyLinkedList<int> list = new MyLinkedList<int>();
-            int value = 5;
             //Act
-            var node = list.AddFirst(value);
-            list.AddFirst(2);
-            list.Remove(2);
+            list.AddLast(2);
+           // list.Remove(2);
             //Assert
-            Assert.AreEqual(value, node.Data);
             Assert.AreNotEqual(true, list.Contains(2));
         }
         [TestMethod]
@@ -45,25 +41,26 @@ namespace MyLinkedListTests
         {
             //Assign
             MyLinkedList<int> list = new MyLinkedList<int>();
-            int value = 5;
             //Act
-            var node = list.AddFirst(value);
-            list.AddFirst(2);
-            list.AddFirst(3);
-            list.AddFirst(4);
-            var found = list.Find(2);
+            list.AddLast(2);
+            list.AddLast(3);
+            list.AddLast(4);
+           // var found = list.Find(2);
             //Assert
-            Assert.AreEqual(2, found);
+          //  Assert.AreEqual(2, found);
         }
         [TestMethod]
         public void TestClear()
         {
             //Assign
-
+            MyLinkedList<int> list = new MyLinkedList<int>();
             //Act
-
+            list.AddLast(2);
+            list.AddLast(3);
+            list.AddLast(4);
+            list.Clear();
             //Assert
-
+            Assert.AreNotEqual(list.Contains(2), true);
         }
     }
 }
