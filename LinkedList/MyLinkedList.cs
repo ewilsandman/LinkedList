@@ -53,7 +53,7 @@ namespace MyLinkedList
         }
         public bool Contains(T data)
         {
-            if (head.Data.Equals(null))
+            if (head == null)
             {
                 return false;
             }
