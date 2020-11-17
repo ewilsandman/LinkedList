@@ -3,10 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 namespace MyLinkedList
 {
-    public class MyLinkedList<T>
+    public class MyLinkedList<T>: IEnumerable<T>
     {
         public Node<T> head = null;
-
         public int Count()
         {
             int count = 0;
@@ -70,8 +69,98 @@ namespace MyLinkedList
                 return false;
             }
         }
+        public Node<T> FindNode(T data)
+        {
+            if (head == null)
+            {
+                return null;
+            } 
+            if (Equals(head.Data, data))
+            {
+                return head;
+            }
+            else if (Equals(head.Next.Data, data))
+            {
+                return head.Next;
+            }
+            else
+            {
+                return head.Next.Find(data);
+            }
+        }
+        public int FindIndex(T data)
+        {
+            int index = 0;
+            return index;
+        }
+        public void Remove(T data)
+        {
+            if (head == null)
+            {
+                return;
+            }
+            else if (Equals(head.Data, data))
+            {
+                head = head.Next;
+            }
+            else if (Equals(head.Next.Data, data)) 
+            {
+                head.Next = head.Next.Next;
+            }
+            else
+            {
+                head.Next.Remove(data);
+            }
+        }
+        public void Remove(Node<T> toRemove)
+        {
+            if (head == null)
+            {
+                return;
+            }
+            else if (head == toRemove)
+            {
+                head = head.Next;
+            }
+            else if (head.Next == toRemove)
+            {
+                head.Next = head.Next.Next;
+            }
+            else
+            {
+                head.Next.Remove(toRemove);
+            }
+        }
+        public Node<T> this[int index]
+        {
+           
+            get => FindByIndex(index);
+            //set => Dummy[index] = value;
+        }
+        private Node<T> FindByIndex(int index)
+        {
+            //Dummy
+            if (head != null) 
+            {
+                return head;
+            }
+            else
+            {
+                return null;
+            }
+            
+        }
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return (IEnumerator)GetEnumerator();
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
     }
-    public class Node<T>
+    public class Node<T> 
     {
         public int Count(int count)
         {
@@ -110,22 +199,50 @@ namespace MyLinkedList
                 return false;
             }
         }
-       /* public int Find(T data)
+        public Node<T> Find(T data)
         {
-            
+            if (Equals(Next.Data, data))
+            {
+                return Next;
+            }
+            else if (Next == null)
+            {
+                return null;
+            }
+            else
+            {
+                return Next.Find(data);
+            }
         }
-        public void Remove(Node T)
+        public void Remove(Node<T> toRemove)
         {
-
+            if (Next != null)
+            {
+                if (Next == toRemove)
+                {
+                    Next = Next.Next;
+                }
+                else
+                {
+                    Next.Remove(toRemove);
+                }
+            }
         }
         public void Remove(T data)
         {
-
-        }*/
-        public void GetEnumerator()
-        {
-
+            if (Next != null)
+            {
+                if (Equals(Next.Data, data))
+                {
+                    Next = Next.Next;
+                }
+                else
+                {
+                    Next.Remove(data);
+                }
+            }
         }
+  
         public T Data { get; set; }
         public Node<T> Next { get; set; } = null;
         public Node(T data)
