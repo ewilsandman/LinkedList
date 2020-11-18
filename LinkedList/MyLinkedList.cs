@@ -6,6 +6,31 @@ namespace MyLinkedList
     public class MyLinkedList<T>: IEnumerable<T>
     {
         public Node<T> head = null;
+        public class ListEnum : IEnumerator<T>
+        {
+        MyLinkedList<T> list;
+        int position = -1;
+
+        public IEnumerator(MyLinkedList<T> list)
+        {
+                this.list = list;
+        }
+            public bool MoveNext()
+            {
+                return ++position < list.Count;
+            }
+            public T current
+            {
+                get
+                {
+                    if(position == -1)
+                        {
+                        throw new InvalidOperationException();
+                        }
+                    return list[position];
+                }
+            }
+        }
         public int Count()
         {
             int count = 0;
@@ -88,24 +113,21 @@ namespace MyLinkedList
                 return head.Next.Find(data);
             }
         }
-        public int FindIndex(T data)
-        {
-            int index = 0;
-            return index;
-        }
-        public void Remove(T data)
+        public bool Remove(T data)
         {
             if (head == null)
             {
-                return;
+                return false;
             }
             else if (Equals(head.Data, data))
             {
                 head = head.Next;
+                return true;
             }
             else if (Equals(head.Next.Data, data)) 
             {
                 head.Next = head.Next.Next;
+                return true;
             }
             else
             {
@@ -133,31 +155,41 @@ namespace MyLinkedList
         }
         public Node<T> this[int index]
         {
-           
             get => FindByIndex(index);
-            //set => Dummy[index] = value;
+            set => Dummy[index] = value;
         }
+        
         private Node<T> FindByIndex(int index)
         {
-            //Dummy
-            if (head != null) 
+        int localCount = 0;
+            if (head == null)
+            {
+                return;
+            }
+            else if (localCount == index)
             {
                 return head;
             }
+            else if(head.Next != null)
+            {
+            else if (localCount++ == index) 
+            {
+                return head.Next;
+            }
             else
             {
-                return null;
+                head.Next.Remove(data);
             }
-            
+            }
+            return;
         }
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return (IEnumerator)GetEnumerator();
+            return (IEnumerator)ListEnum();
         }
-
         public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+           GetEnumerator();
         }
     }
     public class Node<T> 
@@ -199,6 +231,19 @@ namespace MyLinkedList
                 return false;
             }
         }
+    public Node<T> FindByIndex(int index, int localCount)
+        {   if (Next != null)
+            {
+                if (localCount++ == index)
+                {
+                    return Next;
+                }
+                else
+                {
+                    localCount++;
+                    Next.FindByIndex(index, localCount);
+                }
+            }        }
         public Node<T> Find(T data)
         {
             if (Equals(Next.Data, data))
@@ -214,18 +259,23 @@ namespace MyLinkedList
                 return Next.Find(data);
             }
         }
-        public void Remove(Node<T> toRemove)
+        public bool Remove(Node<T> toRemove)
         {
             if (Next != null)
             {
                 if (Next == toRemove)
                 {
                     Next = Next.Next;
+                    return true;
                 }
                 else
                 {
                     Next.Remove(toRemove);
                 }
+            }
+            else
+            {
+                return false;
             }
         }
         public void Remove(T data)
@@ -242,7 +292,6 @@ namespace MyLinkedList
                 }
             }
         }
-  
         public T Data { get; set; }
         public Node<T> Next { get; set; } = null;
         public Node(T data)
