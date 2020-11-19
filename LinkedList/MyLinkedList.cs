@@ -8,12 +8,13 @@ namespace MyLinkedList
         public Node<T> head = null;
         public class ListEnum : IEnumerator<T>
         {
-            MyLinkedList<T> list;
-            int position = -1;
+            private MyLinkedList<T> list;
+            private int position;
 
             public void IEnumerator(MyLinkedList<T> list)
             {
                 this.list = list;
+                position = -1;
             }
             public bool MoveNext()
             {
@@ -29,22 +30,20 @@ namespace MyLinkedList
             {
                 throw new NotImplementedException();
             }
+            object IEnumerator.Current => throw new NotImplementedException();
 
-            public Node<T> current
+            T IEnumerator<T>.Current
             {
                 get
                 {
-                    if(position == -1)
-                        {
+                    if (position == -1)
+                    {
                         throw new InvalidOperationException();
-                        }
-                    return list[position];
+                    }
+                    return (T)Convert.ChangeType(list[position], typeof(T));
                 }
             }
-
-            public T Current => throw new NotImplementedException();
-
-            object IEnumerator.Current => throw new NotImplementedException();
+                
         }
         public int Count()
         {
@@ -92,6 +91,7 @@ namespace MyLinkedList
         }
         public bool Contains(T data)
         {
+            //TODO: check head.Next
             if (head == null)
             {
                 return false;
@@ -111,6 +111,7 @@ namespace MyLinkedList
         }
         public Node<T> FindNode(T data)
         {
+            //TODO: check head.Next
             if (head == null)
             {
                 return null;
@@ -136,6 +137,7 @@ namespace MyLinkedList
             }
             else if (Equals(head.Data, data))
             {
+                //TODO check for null
                 head = head.Next;
                 return true;
             }
@@ -151,6 +153,7 @@ namespace MyLinkedList
         }
         public void Remove(Node<T> toRemove)
         {
+            //TODO: check head.Next
             if (head == null)
             {
                 return;
@@ -171,7 +174,7 @@ namespace MyLinkedList
         public Node<T> this[int index]
         {
             get => FindByIndex(index);
-            set => Dummy[index] = value;
+            //set => FindByIndex(index) = value;
         }
         
         private Node<T> FindByIndex(int index)
@@ -200,11 +203,11 @@ namespace MyLinkedList
         }
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return (IEnumerator)IEnumerator();
+            return new ListEnum();
         }
         public IEnumerator<T> GetEnumerator()
         {
-           GetEnumerator();
+            return new ListEnum();
         }
     }
     public class Node<T> 
@@ -235,8 +238,9 @@ namespace MyLinkedList
         public bool Contains(T data)
         {
             if (Data.Equals(data))
+            {
                 return true;
-
+            }
             if (Next != null)
             {
                 return Next.Contains(data);
@@ -266,6 +270,7 @@ namespace MyLinkedList
         }
         public Node<T> Find(T data)
         {
+            //TODO: check Next
             if (Equals(Next.Data, data))
             {
                 return Next;
@@ -279,24 +284,20 @@ namespace MyLinkedList
                 return Next.Find(data);
             }
         }
-        public bool Remove(Node<T> toRemove)
+        public void Remove(Node<T> toRemove)
         {
             if (Next != null)
             {
                 if (Next == toRemove)
                 {
                     Next = Next.Next;
-                    return true;
                 }
                 else
                 {
                     Next.Remove(toRemove);
                 }
             }
-            else
-            {
-                return false;
-            }
+             
         }
         public bool Remove(T data)
         {

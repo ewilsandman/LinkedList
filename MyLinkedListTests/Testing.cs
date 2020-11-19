@@ -49,7 +49,7 @@ namespace MyLinkedListTests
             Assert.AreEqual(true, list.Contains(1));
         }
         [TestMethod]
-        public void TestRemoveNumber()
+        public void TestRemoveNode()
         {
             //Assign
             MyLinkedList<int> list = new MyLinkedList<int>();
@@ -106,6 +106,32 @@ namespace MyLinkedListTests
 
         }
         [TestMethod]
+        public void TestCount()
+        {
+
+        }
+        [TestMethod]
+        public void TestEnum()
+        {
+
+        }
+        [TestMethod]
+        public void TestMoveNext()
+        {
+
+        }
+        [TestMethod]
+        public void TestReset()
+        {
+
+        }
+        [TestMethod]
+        public void TestDispose()
+        {
+
+        }
+
+        [TestMethod]
         public void TestIndex()
         {
             //Assign
@@ -114,9 +140,9 @@ namespace MyLinkedListTests
             list.AddLast(2);
             list.AddLast(3);
             list.AddLast(4);
-            list.FindIndex(2);
+            var hack =list[2];
             //Assert
-            Assert.AreNotEqual(list.Contains(2), true);
+           // Assert.AreNotEqual(list.Contains(2), true);
         }
     }
 }
