@@ -8,17 +8,28 @@ namespace MyLinkedList
         public Node<T> head = null;
         public class ListEnum : IEnumerator<T>
         {
-        MyLinkedList<T> list;
-        int position = -1;
+            MyLinkedList<T> list;
+            int position = -1;
 
-        public IEnumerator(MyLinkedList<T> list)
-        {
+            public void IEnumerator(MyLinkedList<T> list)
+            {
                 this.list = list;
-        }
+            }
             public bool MoveNext()
             {
                 return ++position < list.Count;
             }
+
+            public void Reset()
+            {
+                position = -1;
+            }
+
+            public void Dispose()
+            {
+                throw new NotImplementedException();
+            }
+
             public T current
             {
                 get
@@ -30,6 +41,10 @@ namespace MyLinkedList
                     return list[position];
                 }
             }
+
+            public T Current => throw new NotImplementedException();
+
+            object IEnumerator.Current => throw new NotImplementedException();
         }
         public int Count()
         {
@@ -164,24 +179,24 @@ namespace MyLinkedList
         int localCount = 0;
             if (head == null)
             {
-                return;
+                return null;
             }
             else if (localCount == index)
             {
                 return head;
             }
-            else if(head.Next != null)
+            if(head.Next != null)
             {
-            else if (localCount++ == index) 
-            {
-                return head.Next;
+                if (localCount++ == index) 
+                {
+                    return head.Next;
+                }
+                else
+                {
+                    head.Next.Remove(data);
+                }
             }
-            else
-            {
-                head.Next.Remove(data);
-            }
-            }
-            return;
+            return null;
         }
         IEnumerator IEnumerable.GetEnumerator()
         {
