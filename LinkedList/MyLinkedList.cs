@@ -17,7 +17,7 @@ namespace MyLinkedList
             }
             public bool MoveNext()
             {
-                return ++position < list.Count;
+                return ++position < list.Count();
             }
 
             public void Reset()
@@ -30,7 +30,7 @@ namespace MyLinkedList
                 throw new NotImplementedException();
             }
 
-            public T current
+            public Node<T> current
             {
                 get
                 {
@@ -146,7 +146,7 @@ namespace MyLinkedList
             }
             else
             {
-                head.Next.Remove(data);
+               return head.Next.Remove(data);
             }
         }
         public void Remove(Node<T> toRemove)
@@ -193,14 +193,14 @@ namespace MyLinkedList
                 }
                 else
                 {
-                    head.Next.Remove(data);
+                    head.Next.FindByIndex(index, localCount);
                 }
             }
             return null;
         }
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return (IEnumerator)ListEnum();
+            return (IEnumerator)IEnumerator();
         }
         public IEnumerator<T> GetEnumerator()
         {
@@ -256,9 +256,14 @@ namespace MyLinkedList
                 else
                 {
                     localCount++;
-                    Next.FindByIndex(index, localCount);
+                    return Next.FindByIndex(index, localCount);
                 }
-            }        }
+            }
+        else
+            {
+                return null;
+            }
+        }
         public Node<T> Find(T data)
         {
             if (Equals(Next.Data, data))
@@ -293,18 +298,23 @@ namespace MyLinkedList
                 return false;
             }
         }
-        public void Remove(T data)
+        public bool Remove(T data)
         {
             if (Next != null)
             {
                 if (Equals(Next.Data, data))
                 {
                     Next = Next.Next;
+                    return true;
                 }
                 else
                 {
-                    Next.Remove(data);
+                  return Next.Remove(data);
                 }
+            }
+            else
+            {
+                return false;
             }
         }
         public T Data { get; set; }
