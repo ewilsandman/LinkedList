@@ -18,7 +18,11 @@ namespace MyLinkedList
             }
             public bool MoveNext()
             {
-                return ++position < list.Count();
+                if(list.head != null)
+                {
+                    return ++position < list.Count();
+                }
+                return false;
             }
 
             public void Reset()
@@ -27,10 +31,8 @@ namespace MyLinkedList
             }
 
             public void Dispose()
-            {
-                throw new NotImplementedException();
-            }
-            object IEnumerator.Current => throw new NotImplementedException();
+            {}
+            object IEnumerator.Current=> throw new NotImplementedException();
 
             T IEnumerator<T>.Current
             {
@@ -91,7 +93,6 @@ namespace MyLinkedList
         }
         public bool Contains(T data)
         {
-            //TODO: check head.Next
             if (head == null)
             {
                 return false;
@@ -111,7 +112,6 @@ namespace MyLinkedList
         }
         public Node<T> FindNode(T data)
         {
-            //TODO: check head.Next
             if (head == null)
             {
                 return null;
@@ -119,6 +119,10 @@ namespace MyLinkedList
             if (Equals(head.Data, data))
             {
                 return head;
+            }
+            if (head.Next == null)
+            {
+                return null;
             }
             else if (Equals(head.Next.Data, data))
             {
@@ -137,9 +141,12 @@ namespace MyLinkedList
             }
             else if (Equals(head.Data, data))
             {
-                //TODO check for null
                 head = head.Next;
                 return true;
+            }
+            if (head.Next == null)
+            {
+                return false;
             }
             else if (Equals(head.Next.Data, data)) 
             {
@@ -153,7 +160,6 @@ namespace MyLinkedList
         }
         public void Remove(Node<T> toRemove)
         {
-            //TODO: check head.Next
             if (head == null)
             {
                 return;
@@ -161,6 +167,10 @@ namespace MyLinkedList
             else if (head == toRemove)
             {
                 head = head.Next;
+            }
+            if (head.Next == null)
+            {
+                return;
             }
             else if (head.Next == toRemove)
             {
@@ -270,14 +280,13 @@ namespace MyLinkedList
         }
         public Node<T> Find(T data)
         {
-            //TODO: check Next
-            if (Equals(Next.Data, data))
-            {
-                return Next;
-            }
-            else if (Next == null)
+            if (Next == null)
             {
                 return null;
+            }
+            else if (Equals(Next.Data, data))
+            {
+                return Next;
             }
             else
             {

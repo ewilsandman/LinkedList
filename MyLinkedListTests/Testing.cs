@@ -85,6 +85,7 @@ namespace MyLinkedListTests
             //Assert
             Assert.AreNotEqual(1, node.Data);
             Assert.AreEqual(3, node.Data);
+            Assert.AreNotEqual(4, node.Data);
         }
         [TestMethod]
         public void TestClear()
@@ -96,41 +97,84 @@ namespace MyLinkedListTests
             list.AddLast(3);
             list.AddLast(4);
             list.Clear();
+            list.AddLast(1);
             //Assert
             Assert.AreNotEqual(list.Contains(2), true);
             Assert.AreNotEqual(list.Contains(3), true);
+            Assert.AreEqual(list.Contains(1), true);
         }
         [TestMethod]
         public void TestForeach()
         {
-
+            //Assign
+            MyLinkedList<int> list = new MyLinkedList<int>();
+            //Act
+            list.AddLast(2);
+            list.AddLast(3);
+            list.AddLast(4);
+            //node = list.AddLast(3)
+            //Assert
+            foreach (var item in list)
+            {
+                Assert.AreEqual(2, item);
+            }
         }
         [TestMethod]
         public void TestCount()
         {
-
+            //Assign
+            MyLinkedList<int> list = new MyLinkedList<int>();
+            //Act
+            list.AddLast(2);
+            list.AddLast(5);
+            list.AddLast(3);
+            list.AddLast(9);
+            list.AddLast(7);
+            list.AddLast(1);
+            //Assert
+            Assert.AreEqual(list.Count(), 6);
+            Assert.AreNotEqual(list.Count(), 5);
         }
         [TestMethod]
         public void TestEnum()
         {
+            //Assign
+
+            //Act
+
+            //Assert
 
         }
         [TestMethod]
         public void TestMoveNext()
         {
+            //Assign
+
+            //Act
+
+            //Assert
 
         }
         [TestMethod]
         public void TestReset()
         {
+            //Assign
+
+            //Act
+
+            //Assert
 
         }
         [TestMethod]
         public void TestDispose()
         {
+            //Assign
+
+            //Act
+
+            //Assert
 
         }
-
         [TestMethod]
         public void TestIndex()
         {
