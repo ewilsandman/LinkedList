@@ -108,6 +108,7 @@ namespace MyLinkedListTests
         {
             //Assign
             MyLinkedList<int> list = new MyLinkedList<int>();
+            
             //Act
             list.AddLast(2);
             list.AddLast(3);

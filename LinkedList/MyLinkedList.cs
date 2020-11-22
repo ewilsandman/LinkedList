@@ -6,47 +6,6 @@ namespace MyLinkedList
     public class MyLinkedList<T>: IEnumerable<T>
     {
         public Node<T> head = null;
-        public class ListEnum : IEnumerator<T>
-        {
-            private MyLinkedList<T> list;
-            private int position;
-
-            public void IEnumerator(MyLinkedList<T> list)
-            {
-                this.list = list;
-                position = -1;
-            }
-            public bool MoveNext()
-            {
-                if(list.head != null)
-                {
-                    return ++position < list.Count();
-                }
-                return false;
-            }
-
-            public void Reset()
-            {
-                position = -1;
-            }
-
-            public void Dispose()
-            {}
-            object IEnumerator.Current=> throw new NotImplementedException();
-
-            T IEnumerator<T>.Current
-            {
-                get
-                {
-                    if (position == -1)
-                    {
-                        throw new InvalidOperationException();
-                    }
-                    return (T)Convert.ChangeType(list[position], typeof(T));
-                }
-            }
-                
-        }
         public int Count()
         {
             int count = 0;
@@ -213,11 +172,11 @@ namespace MyLinkedList
         }
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return new ListEnum();
+            return GetEnumerator();
         }
         public IEnumerator<T> GetEnumerator()
         {
-            return new ListEnum();
+            return new ListEnum<T>(this);
         }
     }
     public class Node<T> 
