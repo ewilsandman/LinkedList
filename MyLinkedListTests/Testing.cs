@@ -108,17 +108,19 @@ namespace MyLinkedListTests
         {
             //Assign
             MyLinkedList<int> list = new MyLinkedList<int>();
+            int localCount = 0;
             
             //Act
             list.AddLast(2);
             list.AddLast(3);
             list.AddLast(4);
-            //node = list.AddLast(3)
             //Assert
             foreach (var item in list)
             {
-                Assert.AreEqual(2, item);
+                localCount++;
             }
+            Assert.AreEqual(localCount, list.Count());
+            Assert.AreNotEqual(localCount, 1);
         }
         [TestMethod]
         public void TestCount()
@@ -167,14 +169,22 @@ namespace MyLinkedListTests
 
         }
         [TestMethod]
-        public void TestDispose()
+        public void TestAddString()
         {
             //Assign
+            MyLinkedList<string> list = new MyLinkedList<string>();
 
             //Act
+            list.AddLast("2");
+            list.AddLast("pootIs");
+            list.AddLast("åäö");
+            list.AddFirst("8");
 
             //Assert
-
+            Assert.AreEqual(true, list.Contains("åäö"));
+            Assert.AreEqual(list.Count(), 4);
+            Assert.AreEqual(true, list.Contains("8"));
+            Assert.AreEqual(true, list.Contains("pootIs"));
         }
         [TestMethod]
         public void TestIndex()
