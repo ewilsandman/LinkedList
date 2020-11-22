@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 namespace MyLinkedList
 {
-    public class MyLinkedList<T>: IEnumerable<T>
+    public class MyLinkedList<T>: IEnumerable<Node<T>>
     {
         public Node<T> head = null;
         public int Count()
@@ -174,7 +174,7 @@ namespace MyLinkedList
         {
             return GetEnumerator();
         }
-        public IEnumerator<T> GetEnumerator()
+        public IEnumerator<Node<T>> GetEnumerator()
         {
             return new ListEnum<T>(this);
         }

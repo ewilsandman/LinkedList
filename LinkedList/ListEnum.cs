@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace MyLinkedList
 {
-    public class ListEnum<T> : IEnumerator<T>
+    public class ListEnum<T> : IEnumerator<Node<T>>
     {
         private MyLinkedList<T> list;
         private int position;
@@ -33,7 +33,7 @@ namespace MyLinkedList
             // This method is intentionally left empty
         }
 
-        public T Current
+        public Node<T> Current
         {
             get
             {
