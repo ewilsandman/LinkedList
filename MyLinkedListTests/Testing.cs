@@ -61,8 +61,8 @@ namespace MyLinkedListTests
             list.AddLast(9);
             list.AddLast(7);
             list.AddLast(1);
-            list.Remove(list.FindNode(5));
-            list.Remove(list.FindNode(9));
+            list.Remove(list.Find(5));
+            list.Remove(list.Find(9));
 
             //Assert
             Assert.AreEqual(true, list.Contains(2));
@@ -71,6 +71,7 @@ namespace MyLinkedListTests
             Assert.AreNotEqual(true, list.Contains(9));
             Assert.AreEqual(true, list.Contains(7));
             Assert.AreEqual(true, list.Contains(1));
+            Assert.ThrowsException<ArgumentNullException>(() => list.Remove(list.Find(0)));
         }
         [TestMethod]
         public void TestFind()
@@ -81,7 +82,7 @@ namespace MyLinkedListTests
             list.AddLast(2);
             list.AddLast(3);
             list.AddLast(4);
-            var node = list.FindNode(3);
+            var node = list.Find(3);
             //Assert
             Assert.AreNotEqual(1, node.Data);
             Assert.AreEqual(3, node.Data);
@@ -195,9 +196,12 @@ namespace MyLinkedListTests
             list.AddLast(2);
             list.AddLast(3);
             list.AddLast(4);
-            var hack =list[2];
             //Assert
-           // Assert.AreNotEqual(list.Contains(2), true);
+            Assert.AreEqual(3, list.Count());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => list[10]);
+            Assert.AreEqual(2, list[0].Data);
+            Assert.AreEqual(3, list[1].Data);
+            Assert.AreEqual(4, list[2].Data);
         }
     }
 }

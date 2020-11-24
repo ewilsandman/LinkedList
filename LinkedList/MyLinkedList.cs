@@ -31,10 +31,15 @@ namespace MyLinkedList
                 newNode.Next = head.Next;
                 head.Next = newNode;
             }
+            /*
+            InvalidOperationException
+            node belongs to another LinkedList<T>.
+            Kan inte implementera
+            */
         }
         public void AddLast(T data)
         {
-            if(head == null)
+            if (head == null)
             {
                 head = new Node<T>(data);
             }
@@ -42,6 +47,15 @@ namespace MyLinkedList
             {
                 head.AddLast(data);
             }
+            /*
+             *             if (data == null)
+            {
+                throw new ArgumentNullException();
+            }
+            InvalidOperationException
+            node belongs to another LinkedList<T>.
+            Kan inte implementera
+            */
         }
         public void Clear()
         {
@@ -49,6 +63,10 @@ namespace MyLinkedList
             {
                 head = null;
             }
+            /*NotSupportedException
+The ICollection<T> is read-only.
+            kan inte implementera
+            */
         }
         public bool Contains(T data)
         {
@@ -69,7 +87,7 @@ namespace MyLinkedList
                 return false;
             }
         }
-        public Node<T> FindNode(T data)
+        public Node<T> Find(T data)
         {
             if (head == null)
             {
@@ -119,6 +137,10 @@ namespace MyLinkedList
         }
         public void Remove(Node<T> toRemove)
         {
+            if (toRemove == null)
+            {
+                throw new ArgumentNullException();
+            }
             if (head == null)
             {
                 return;
@@ -139,6 +161,13 @@ namespace MyLinkedList
             {
                 head.Next.Remove(toRemove);
             }
+            /*
+ArgumentNullException
+node is null.
+
+InvalidOperationException
+node belongs to another LinkedList<T>.
+*/
         }
         public Node<T> this[int index]
         {
@@ -148,27 +177,28 @@ namespace MyLinkedList
         
         private Node<T> FindByIndex(int index)
         {
-        int localCount = 0;
+            int localCount = 0;
             if (head == null)
             {
-                return null;
+                throw new ArgumentOutOfRangeException();
             }
-            else if (localCount == index)
+            else if (index ==0)
             {
                 return head;
             }
-            if(head.Next != null)
+
+            if (index > Count()-1)
             {
-                if (localCount++ == index) 
-                {
-                    return head.Next;
-                }
-                else
-                {
-                    head.Next.FindByIndex(index, localCount);
-                }
+                throw new ArgumentOutOfRangeException();
             }
-            return null;
+
+            Node<T> tempnode = head;
+            while (localCount != index)
+            {
+                localCount++;
+                tempnode = tempnode.Next;
+            }
+            return tempnode;
         }
         IEnumerator IEnumerable.GetEnumerator()
         {
@@ -219,24 +249,7 @@ namespace MyLinkedList
                 return false;
             }
         }
-    public Node<T> FindByIndex(int index, int localCount)
-        {   if (Next != null)
-            {
-                if (localCount++ == index)
-                {
-                    return Next;
-                }
-                else
-                {
-                    localCount++;
-                    return Next.FindByIndex(index, localCount);
-                }
-            }
-        else
-            {
-                return null;
-            }
-        }
+ 
         public Node<T> Find(T data)
         {
             if (Next == null)
@@ -265,7 +278,10 @@ namespace MyLinkedList
                     Next.Remove(toRemove);
                 }
             }
-             
+            else
+            {
+                throw new InvalidOperationException();
+            } 
         }
         public bool Remove(T data)
         {
