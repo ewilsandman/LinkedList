@@ -140,36 +140,6 @@ namespace MyLinkedListTests
             Assert.AreNotEqual(list.Count(), 5);
         }
         [TestMethod]
-        public void TestEnum()
-        {
-            //Assign
-
-            //Act
-
-            //Assert
-
-        }
-        [TestMethod]
-        public void TestMoveNext()
-        {
-            //Assign
-
-            //Act
-
-            //Assert
-
-        }
-        [TestMethod]
-        public void TestReset()
-        {
-            //Assign
-
-            //Act
-
-            //Assert
-
-        }
-        [TestMethod]
         public void TestAddString()
         {
             //Assign
