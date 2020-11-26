@@ -35,4 +35,6 @@ Datum
 En länk till ett Git-repository där all kod skall finnas.
 Filen skall vara namngiven som NamnEfternamn_LinkedList.pdf, exempel: RobinSengkey_LinkedList.pdf.
 
+## Extra
+Jag har använt SonarLint och försökt fixa de flesta codesmells.
 
