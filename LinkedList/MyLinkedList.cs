@@ -48,10 +48,6 @@ namespace MyLinkedList
                 head.AddLast(data);
             }
             /*
-             *             if (data == null)
-            {
-                throw new ArgumentNullException();
-            }
             InvalidOperationException
             node belongs to another LinkedList<T>.
             Kan inte implementera
@@ -59,12 +55,10 @@ namespace MyLinkedList
         }
         public void Clear()
         {
-            if (head != null)
-            {
-                head = null;
-            }
+        head = null;
+            
             /*NotSupportedException
-The ICollection<T> is read-only.
+            The ICollection<T> is read-only.
             kan inte implementera
             */
         }
@@ -139,7 +133,7 @@ The ICollection<T> is read-only.
         {
             if (toRemove == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException("node is null");
             }
             if (head == null)
             {
@@ -162,17 +156,15 @@ The ICollection<T> is read-only.
                 head.Next.Remove(toRemove);
             }
             /*
-ArgumentNullException
-node is null.
-
-InvalidOperationException
-node belongs to another LinkedList<T>.
-*/
+            ArgumentNullException
+            node is null.
+            InvalidOperationException
+            node belongs to another LinkedList<T>.
+            */
         }
         public Node<T> this[int index]
         {
             get => FindByIndex(index);
-            //set => FindByIndex(index) = value;
         }
         
         private Node<T> FindByIndex(int index)
@@ -180,18 +172,16 @@ node belongs to another LinkedList<T>.
             int localCount = 0;
             if (head == null)
             {
-                throw new ArgumentOutOfRangeException();
+                throw new ArgumentOutOfRangeException("list is empty");
             }
             else if (index ==0)
             {
                 return head;
             }
-
             if (index > Count()-1)
             {
-                throw new ArgumentOutOfRangeException();
+                throw new ArgumentOutOfRangeException("index is out of range");
             }
-
             Node<T> tempnode = head;
             while (localCount != index)
             {

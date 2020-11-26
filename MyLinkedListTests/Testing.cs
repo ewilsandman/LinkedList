@@ -121,7 +121,7 @@ namespace MyLinkedListTests
                 localCount++;
             }
             Assert.AreEqual(localCount, list.Count());
-            Assert.AreNotEqual(localCount, 1);
+            Assert.AreNotEqual(1, localCount);
         }
         [TestMethod]
         public void TestCount()
@@ -136,8 +136,8 @@ namespace MyLinkedListTests
             list.AddLast(7);
             list.AddLast(1);
             //Assert
-            Assert.AreEqual(list.Count(), 6);
-            Assert.AreNotEqual(list.Count(), 5);
+            Assert.AreEqual(6, list.Count());
+            Assert.AreNotEqual(5, list.Count());
         }
         [TestMethod]
         public void TestAddString()
@@ -153,7 +153,7 @@ namespace MyLinkedListTests
 
             //Assert
             Assert.AreEqual(true, list.Contains("åäö"));
-            Assert.AreEqual(list.Count(), 4);
+            Assert.AreEqual(4, list.Count());
             Assert.AreEqual(true, list.Contains("8"));
             Assert.AreEqual(true, list.Contains("pootIs"));
         }
