@@ -172,7 +172,7 @@ namespace MyLinkedList
             int localCount = 0;
             if (head == null)
             {
-                throw new ArgumentOutOfRangeException("list" ,"list is empty");
+                throw new ArgumentOutOfRangeException("index" ,"list is empty");
             }
             else if (index ==0)
             {
