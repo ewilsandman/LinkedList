@@ -18,7 +18,6 @@ Det inlämnade programmet ska ha följande metoder implementerade:
 - [x] Remove(Node T)
 - [x] Remove(T)
 - [x] GetEnumerator() (Se nedan i Iteration och index)
-- [x]
 
 Utöver ovanstående metoder ska listan ha stöd för följande:
 
