@@ -133,7 +133,7 @@ namespace MyLinkedList
         {
             if (toRemove == null)
             {
-                throw new ArgumentNullException("node is null");
+                throw new ArgumentNullException("toRemove" ,"Node is null");
             }
             if (head == null)
             {
@@ -172,7 +172,7 @@ namespace MyLinkedList
             int localCount = 0;
             if (head == null)
             {
-                throw new ArgumentOutOfRangeException("list is empty");
+                throw new ArgumentOutOfRangeException("list" ,"list is empty");
             }
             else if (index ==0)
             {
@@ -180,7 +180,7 @@ namespace MyLinkedList
             }
             if (index > Count()-1)
             {
-                throw new ArgumentOutOfRangeException("index is out of range");
+                throw new ArgumentOutOfRangeException("index" ,"index is out of range");
             }
             Node<T> tempnode = head;
             while (localCount != index)
@@ -270,7 +270,7 @@ namespace MyLinkedList
             }
             else
             {
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("Node is not in list");
             } 
         }
         public bool Remove(T data)

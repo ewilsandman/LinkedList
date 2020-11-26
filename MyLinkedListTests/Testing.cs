@@ -22,7 +22,7 @@ namespace MyLinkedListTests
 
             //Assert
             Assert.AreEqual(true, list.Contains(3));
-            Assert.AreEqual(list.Count(), 4);
+            Assert.AreEqual(4, list.Count());
            Assert.AreEqual(true, list.Contains(8));
         }
         [TestMethod]
@@ -100,9 +100,9 @@ namespace MyLinkedListTests
             list.Clear();
             list.AddLast(1);
             //Assert
-            Assert.AreNotEqual(list.Contains(2), true);
-            Assert.AreNotEqual(list.Contains(3), true);
-            Assert.AreEqual(list.Contains(1), true);
+            Assert.IsFalse(list.Contains(2));
+            Assert.IsFalse(list.Contains(3));
+            Assert.IsTrue(list.Contains(1));
         }
         [TestMethod]
         public void TestForeach()

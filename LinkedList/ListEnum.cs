@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace MyLinkedList
 {
-    public class ListEnum<T> : IEnumerator<Node<T>>, IDisposable
+    public class ListEnum<T> : IEnumerator<Node<T>>
     {
         private readonly MyLinkedList<T> list;
         private int position;
